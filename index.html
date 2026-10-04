@@ -1,0 +1,2368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aila Company Solutions — tecnologia para o futuro</title>
+    <meta name="description" content="Aila Company Solutions desenvolve um ecossistema próprio de software, inteligência artificial, mapas, navegação e comunicação. Conheça o Aila Nano e participe dos testes.">
+    <meta name="theme-color" content="#000000">
+    <style>
+        :root {
+            --ink: #111827;
+            --muted: #5f6878;
+            --panel: rgba(255, 255, 255, 0.94);
+            --panel-light: #f4f3f0;
+            --line: rgba(17, 24, 39, 0.1);
+            --blue: #1d2a3a;
+            --blue-dark: #111827;
+            --cyan: #50657a;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Trebuchet MS", Arial, sans-serif;
+            color: var(--ink);
+            background: #f3f1ee;
+            line-height: 1.6;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 8;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 10px clamp(20px, 5vw, 64px);
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid var(--line);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 5px 18px rgba(17, 24, 39, 0.04);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .brand img {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+        }
+
+        .site-header {
+            flex-wrap: wrap;
+        }
+
+        .header-actions {
+            margin-left: auto;
+        }
+
+        .brand {
+            order: 1;
+        }
+
+        .main-nav {
+            order: 2;
+            flex: 1;
+            justify-content: flex-end;
+        }
+
+        .header-actions {
+            order: 3;
+            margin-left: 0;
+        }
+
+        .footer .share-button {
+            margin-top: 12px;
+        }
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .main-nav a {
+            color: #374151;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: .88rem;
+            transition: color .2s ease;
+        }
+
+        .main-nav a:hover,
+        .main-nav a:focus-visible {
+            color: #000000;
+        }
+
+        .nav-toggle {
+            display: none;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 8px 10px;
+            background: transparent;
+            color: var(--ink);
+            cursor: pointer;
+            font: inherit;
+        }
+
+        main {
+            overflow: hidden;
+        }
+
+        section[id] {
+            scroll-margin-top: 88px;
+        }
+
+        .eyebrow {
+            margin: 0 0 8px;
+            color: var(--cyan);
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
+
+        .section-heading {
+            max-width: 680px;
+            margin-bottom: 28px;
+        }
+
+        .section-heading h2 {
+            margin: 0 0 10px;
+            font-size: clamp(1.8rem, 4vw, 2.7rem);
+            line-height: 1.1;
+        }
+
+        .section-heading p,
+        .products-intro p {
+            color: var(--muted);
+        }
+
+        .hero {
+            position: relative;
+            width: min(92%, 1180px);
+            margin: 0 auto 24px;
+            overflow: hidden;
+            background: #f2efe9;
+            border-radius: 0 0 18px 18px;
+            border: 1px solid rgba(17, 24, 39, 0.08);
+            border-top: 0;
+        }
+
+        .hero-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 680px;
+            object-fit: contain;
+        }
+
+        .hero-brand {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            display: flex;
+            align-items: center;
+            gap: clamp(16px, 3vw, 34px);
+            max-width: calc(100% - 56px);
+            transform: translate(-50%, -50%);
+        }
+
+        .hero-brand img {
+            width: clamp(130px, 20vw, 270px);
+            height: auto;
+            object-fit: contain;
+        }
+
+        .hero-brand h1 {
+            margin: 0;
+            color: #ffffff;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(1.8rem, 4.5vw, 3.8rem);
+            font-weight: 400;
+            line-height: 1.05;
+        }
+
+        .hero-brand h1 .company-part {
+            display: block;
+            margin-top: 10px;
+            font-family: Arial, sans-serif;
+            font-size: .36em;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+        }
+
+        .hero-copy {
+            width: min(92%, 760px);
+            margin: 0 auto 96px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.78);
+            border: 1px solid rgba(17, 24, 39, 0.08);
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 24px rgba(17, 24, 39, 0.03);
+        }
+
+        .hero h2 {
+            margin: 0 0 12px;
+            font-size: clamp(1.8rem, 5vw, 3.2rem);
+            line-height: 1.05;
+        }
+
+        .hero p {
+            margin: 0 auto 26px;
+            max-width: 620px;
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        .beta-button {
+            border: 0;
+            border-radius: 7px;
+            padding: 14px 24px;
+            background: var(--blue);
+            color: #ffffff;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgb(0 0 0 / 35%);
+        }
+
+        .beta-button:hover,
+        .beta-button:focus-visible {
+            background: var(--blue-dark);
+        }
+
+        .quick-links,
+        .platform,
+        .roadmap,
+        .faq {
+            width: min(90%, 1100px);
+            margin: 0 auto 96px;
+        }
+
+        .quick-grid,
+        .platform-grid,
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .info-card,
+        .roadmap-item,
+        .faq details {
+            padding: 24px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+        }
+
+        a.info-card {
+            display: block;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a.info-card:hover,
+        a.info-card:focus-visible {
+            border-color: #8d8d8d;
+        }
+
+        .info-card h3,
+        .roadmap-item h3 {
+            margin: 10px 0 6px;
+        }
+
+        .info-card p,
+        .roadmap-item p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .card-icon {
+            color: var(--cyan);
+            font-size: 1.8rem;
+        }
+
+        .roadmap-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .roadmap-item {
+            position: relative;
+        }
+
+        .roadmap-item::before {
+            content: "";
+            display: block;
+            width: 10px;
+            height: 10px;
+            margin-bottom: 16px;
+            border-radius: 50%;
+            background: var(--cyan);
+            box-shadow: 0 0 0 5px rgb(98 217 232 / 15%);
+        }
+
+        .faq details + details {
+            margin-top: 10px;
+        }
+
+        .faq summary {
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .faq details p {
+            margin-bottom: 0;
+            color: var(--muted);
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 10;
+            display: none;
+            place-items: center;
+            padding: 20px;
+            background: rgb(0 0 0 / 75%);
+        }
+
+        .modal.is-open {
+            display: grid;
+        }
+
+        .modal-content {
+            position: relative;
+            width: min(100%, 560px);
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 28px;
+            box-sizing: border-box;
+            background: #0d172b;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            border: 0;
+            background: transparent;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 1.6rem;
+        }
+
+        .form-panel {
+            width: min(90%, 560px);
+            margin: 64px auto;
+            padding: 28px;
+            box-sizing: border-box;
+            background: rgb(0 0 0 / 55%);
+            border-radius: 12px;
+        }
+
+        .form-panel form,
+        .modal-content form {
+            display: grid;
+            gap: 14px;
+        }
+
+        .form-panel input,
+        .form-panel textarea,
+        .form-panel select,
+        .form-panel button,
+        .modal-content input,
+        .modal-content textarea,
+        .modal-content button {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 12px;
+            border: 0;
+            border-radius: 6px;
+            font: inherit;
+        }
+
+        .form-panel textarea,
+        .modal-content textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .form-panel button,
+        .modal-content button[type="submit"] {
+            background: var(--blue);
+            color: #ffffff;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .support {
+            width: min(90%, 560px);
+            margin: 64px auto;
+            padding: 28px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+        }
+
+        .about {
+            width: min(90%, 760px);
+            margin: 64px auto;
+            padding: 32px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            line-height: 1.7;
+        }
+
+        .about h2 {
+            margin-top: 0;
+        }
+
+        .about h3 {
+            margin-bottom: 8px;
+        }
+
+        .products {
+            width: min(90%, 1000px);
+            margin: 64px auto;
+        }
+
+        .products-intro,
+        .product-card,
+        .ecosystem {
+            padding: 28px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+        }
+
+        .products-intro {
+            margin-bottom: 24px;
+        }
+
+        .focus-notice {
+            margin: 20px 0 0;
+            padding: 14px 16px;
+            border-left: 3px solid #263d66;
+            background: #f2f4f7;
+            color: #4e5665;
+        }
+
+        .products-intro h2,
+        .product-card h2,
+        .ecosystem h2 {
+            margin-top: 0;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .product-card {
+            line-height: 1.6;
+            transition: transform .2s ease, border-color .2s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: rgb(98 217 232 / 60%);
+        }
+
+        .product-toolbar {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .product-toolbar input,
+        .product-toolbar select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            background: rgb(4 10 22 / 80%);
+            color: var(--ink);
+            font: inherit;
+        }
+
+        .product-toolbar input {
+            max-width: 420px;
+        }
+
+        .product-toolbar select {
+            max-width: 220px;
+        }
+
+        .product-card.is-hidden {
+            display: none;
+        }
+
+        .product-card h3 {
+            margin-bottom: 8px;
+        }
+
+        .product-card ul {
+            padding-left: 24px;
+        }
+
+        .product-status {
+            font-weight: 700;
+        }
+
+        .ecosystem {
+            margin-top: 24px;
+            line-height: 1.7;
+        }
+
+        .footer {
+            padding: 36px clamp(20px, 5vw, 64px);
+            background: #050b17;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .back-to-top {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 5;
+            border: 1px solid var(--line);
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            background: var(--panel-light);
+            color: var(--ink);
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .2s ease;
+        }
+
+        .back-to-top.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .assistant-float {
+            position: fixed;
+            right: 18px;
+            bottom: 78px;
+            z-index: 6;
+            padding: 10px 14px;
+            border: 1px solid #1f2a3a;
+            border-radius: 4px;
+            background: #1f2a3a;
+            color: #ffffff;
+            cursor: pointer;
+            font: 600 .9rem Arial, sans-serif;
+        }
+
+        .assistant-float:hover,
+        .assistant-float:focus-visible {
+            background: #111827;
+        }
+
+        .support h2 {
+            margin-top: 0;
+        }
+
+        .support form {
+            display: grid;
+            gap: 14px;
+        }
+
+        .support label {
+            font-weight: 600;
+        }
+
+        .support input,
+        .support textarea,
+        .support button {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 12px;
+            border: 0;
+            border-radius: 6px;
+            font: inherit;
+        }
+
+        .support textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .support button {
+            cursor: pointer;
+            background: #ffffff;
+            color: #111111;
+            font-weight: 700;
+        }
+
+        .support button:hover,
+        .support button:focus-visible {
+            background: #e5e5e5;
+        }
+
+        @media (max-width: 680px) {
+            .site-header {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 16px 20px;
+            }
+
+            .main-nav {
+                flex-wrap: wrap;
+                gap: 12px 20px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .site-header {
+                flex-wrap: wrap;
+            }
+
+            .header-actions {
+                order: 2;
+                margin-left: auto;
+            }
+
+            .main-nav {
+                order: 3;
+                flex: none;
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .nav-toggle {
+                display: block;
+                margin-left: auto;
+            }
+
+            .site-header .brand h1 {
+                font-size: 1.05rem;
+            }
+
+            .site-header .brand-name .company-part {
+                display: none;
+            }
+
+            .main-nav {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0;
+                padding-top: 8px;
+            }
+
+            .main-nav.is-open {
+                display: flex;
+            }
+
+            .main-nav a {
+                padding: 10px 0;
+                border-top: 1px solid var(--line);
+            }
+
+            .quick-grid,
+            .platform-grid,
+            .roadmap-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-toolbar {
+                flex-direction: column;
+            }
+
+            .product-toolbar input,
+            .product-toolbar select {
+                max-width: none;
+            }
+
+            .hero {
+                width: 100%;
+                border-radius: 0 0 14px 14px;
+            }
+
+            .hero-image {
+                max-height: none;
+            }
+
+            .hero-brand {
+                left: 50%;
+                gap: 14px;
+                max-width: calc(100% - 48px);
+            }
+
+            .hero-brand img {
+                width: 105px;
+            }
+
+            .hero-brand h1 {
+                font-size: clamp(1.25rem, 6vw, 2rem);
+            }
+
+            .hero-brand h1 .company-part {
+                margin-top: 7px;
+                letter-spacing: .14em;
+            }
+        }
+
+        body {
+            color: #202633;
+            background: #000000;
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        .site-header {
+            background: #000000;
+            border-bottom: 1px solid #262626;
+            backdrop-filter: none;
+        }
+
+        .brand h1 {
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0;
+        }
+
+        .brand-name {
+            font-family: Georgia, "Times New Roman", serif;
+            letter-spacing: 0;
+        }
+
+        .brand-name .company-part {
+            font-family: Arial, sans-serif;
+            font-size: .72em;
+            letter-spacing: .14em;
+            white-space: nowrap;
+        }
+
+        .brand-name .company-part::before {
+            content: " ";
+        }
+
+        .brand h1.brand-name {
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        .main-nav a {
+            color: #c9c9c9;
+            font-family: Arial, sans-serif;
+            font-weight: 400;
+            text-shadow: none;
+        }
+
+        .main-nav a:hover,
+        .main-nav a:focus-visible {
+            color: #ffffff;
+        }
+
+        .nav-toggle {
+            border-color: #555555;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+
+        .hero {
+            background: #e7e3da;
+            border-radius: 0;
+        }
+
+        .hero-copy,
+        .products-intro,
+        .product-card,
+        .ecosystem,
+        .about,
+        .support,
+        .form-panel,
+        .info-card,
+        .roadmap-item,
+        .faq details {
+            background: #ffffff;
+            border: 1px solid #d8d5ce;
+            border-radius: 4px;
+            box-shadow: none;
+        }
+
+        .hero-copy {
+            text-align: left;
+        }
+
+        .hero h2,
+        .section-heading h2,
+        .products-intro h2,
+        .product-card h2,
+        .ecosystem h2,
+        .about h2,
+        .support h2,
+        .form-panel h2 {
+            color: #202633;
+            font-weight: 500;
+        }
+
+        .hero p,
+        .section-heading p,
+        .products-intro p,
+        .info-card p,
+        .roadmap-item p {
+            color: #5c6470;
+        }
+
+        .eyebrow {
+            color: #687180;
+            font-family: Arial, sans-serif;
+            letter-spacing: .08em;
+        }
+
+        .beta-button,
+        .form-panel button,
+        .modal-content button[type="submit"] {
+            background: #263d66;
+            border-radius: 4px;
+            box-shadow: none;
+        }
+
+        .beta-button:hover,
+        .beta-button:focus-visible,
+        .form-panel button:hover,
+        .form-panel button:focus-visible,
+        .modal-content button[type="submit"]:hover,
+        .modal-content button[type="submit"]:focus-visible {
+            background: #182c4d;
+        }
+
+        .quick-links,
+        .platform,
+        .roadmap,
+        .faq,
+        .products {
+            margin-bottom: 72px;
+        }
+
+        .info-card,
+        .roadmap-item,
+        .product-card {
+            transition: none;
+        }
+
+        .info-card:hover,
+        .product-card:hover {
+            transform: none;
+        }
+
+        .card-icon,
+        .roadmap-item::before {
+            color: #687180;
+            background: none;
+            box-shadow: none;
+        }
+
+        .product-toolbar input,
+        .product-toolbar select,
+        .form-panel input,
+        .form-panel textarea,
+        .form-panel select,
+        .support input,
+        .support textarea,
+        .modal-content input,
+        .modal-content textarea {
+            border: 1px solid #c9c6bf;
+            border-radius: 4px;
+            background: #ffffff;
+            color: #202633;
+        }
+
+        .support input,
+        .support textarea,
+        .support button {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 12px;
+            border-radius: 4px;
+            font: inherit;
+        }
+
+        .support input,
+        .support textarea {
+            border: 1px solid #c9c6bf;
+            background: #fafafa;
+            color: #202633;
+        }
+
+        .support input:focus,
+        .support textarea:focus {
+            outline: 2px solid #263d66;
+            outline-offset: 1px;
+        }
+
+        .modal {
+            background: rgb(32 38 51 / 45%);
+        }
+
+        .modal-content {
+            background: #ffffff;
+            border: 1px solid #d8d5ce;
+            border-radius: 4px;
+            color: #202633;
+        }
+
+        .modal-close {
+            color: #202633;
+        }
+
+        .support button {
+            border: 0;
+            background: #263d66;
+            color: #ffffff;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .support button:hover,
+        .support button:focus-visible {
+            background: #182c4d;
+        }
+
+        .footer {
+            background: #202633;
+            border-top: 0;
+            color: #d8dce4;
+        }
+
+        .back-to-top {
+            right: 18px;
+            bottom: 126px;
+            background: #202633;
+            border-color: #202633;
+        }
+
+        .assistant-section {
+            width: min(90%, 760px);
+            margin: 0 auto 72px;
+        }
+
+        .assistant-box {
+            padding: 24px;
+            background: #ffffff;
+            border: 1px solid #d8d5ce;
+            border-radius: 4px;
+        }
+
+        .assistant-messages {
+            display: grid;
+            gap: 12px;
+            min-height: 90px;
+            max-height: 360px;
+            margin-bottom: 18px;
+            overflow-y: auto;
+        }
+
+        .assistant-message {
+            max-width: 86%;
+            padding: 11px 14px;
+            border-radius: 4px;
+            white-space: pre-wrap;
+        }
+
+        .assistant-message.user {
+            justify-self: end;
+            background: #263d66;
+            color: #ffffff;
+        }
+
+        .assistant-message.bot {
+            justify-self: start;
+            background: #f2f4f7;
+            color: #202633;
+        }
+
+        .assistant-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .assistant-form input {
+            min-width: 0;
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #c9c6bf;
+            border-radius: 4px;
+            color: #202633;
+            font: inherit;
+        }
+
+        .assistant-form button {
+            padding: 12px 18px;
+            border: 0;
+            border-radius: 4px;
+            background: #263d66;
+            color: #ffffff;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 700;
+        }
+
+        .assistant-form button:disabled {
+            cursor: wait;
+            opacity: .6;
+        }
+
+        .assistant-prompts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .assistant-prompt,
+        .text-size-toggle,
+        .share-button {
+            border: 1px solid #c9c6bf;
+            border-radius: 4px;
+            padding: 8px 11px;
+            background: #ffffff;
+            color: #263d66;
+            cursor: pointer;
+            font: .86rem Arial, sans-serif;
+        }
+
+        .assistant-prompt:hover,
+        .assistant-prompt:focus-visible,
+        .text-size-toggle:hover,
+        .text-size-toggle:focus-visible,
+        .share-button:hover,
+        .share-button:focus-visible {
+            border-color: #263d66;
+            background: #f2f4f7;
+        }
+
+        .results-summary {
+            margin: 0 0 14px;
+            color: #687180;
+            font: .85rem Arial, sans-serif;
+        }
+
+        .no-results {
+            display: none;
+            padding: 24px;
+            border: 1px solid #d8d5ce;
+            background: #ffffff;
+            color: #5c6470;
+        }
+
+        .no-results.is-visible {
+            display: block;
+        }
+
+        body.large-text {
+            font-size: 112.5%;
+        }
+
+        body.large-text .brand h1 {
+            font-size: 1.1rem;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .site-stats,
+        .nano-focus,
+        .participation,
+        .updates {
+            width: min(90%, 1100px);
+            margin: 0 auto 72px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid #d8d5ce;
+            border-bottom: 1px solid #d8d5ce;
+        }
+
+        .stat {
+            padding: 22px 18px;
+            border-right: 1px solid #d8d5ce;
+        }
+
+        .stat:last-child {
+            border-right: 0;
+        }
+
+        .stat strong {
+            display: block;
+            color: #202633;
+            font-family: Arial, sans-serif;
+            font-size: 1.8rem;
+        }
+
+        .stat span {
+            color: #5c6470;
+            font-size: .9rem;
+        }
+
+        .nano-panel {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 36px;
+            padding: clamp(24px, 5vw, 48px);
+            background: #ffffff;
+            border: 1px solid #d8d5ce;
+            border-left: 4px solid #263d66;
+            border-radius: 4px;
+        }
+
+        .nano-panel h2 {
+            margin-top: 0;
+            color: #202633;
+            font-weight: 500;
+        }
+
+        .nano-panel p,
+        .nano-panel li {
+            color: #5c6470;
+        }
+
+        .nano-panel ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .participation-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .participation-item {
+            padding: 24px;
+            background: #ffffff;
+            border: 1px solid #d8d5ce;
+            border-radius: 4px;
+        }
+
+        .participation-item h3 {
+            margin-top: 0;
+            color: #202633;
+            font-weight: 500;
+        }
+
+        .participation-item p {
+            margin-bottom: 0;
+            color: #5c6470;
+        }
+
+        .update-list {
+            border-top: 1px solid #d8d5ce;
+        }
+
+        .update-item {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 24px;
+            padding: 20px 0;
+            border-bottom: 1px solid #d8d5ce;
+        }
+
+        .update-item time {
+            color: #687180;
+            font-family: Arial, sans-serif;
+            font-size: .85rem;
+        }
+
+        .update-item h3 {
+            margin: 0 0 5px;
+            color: #202633;
+            font-weight: 500;
+        }
+
+        .update-item p {
+            margin: 0;
+            color: #5c6470;
+        }
+
+        @media (max-width: 760px) {
+            .stats-grid,
+            .participation-grid,
+            .nano-panel {
+                grid-template-columns: 1fr;
+            }
+
+            .stat {
+                border-right: 0;
+                border-bottom: 1px solid #d8d5ce;
+            }
+
+            .stat:last-child {
+                border-bottom: 0;
+            }
+
+            .update-item {
+                grid-template-columns: 1fr;
+                gap: 4px;
+            }
+
+            .assistant-form {
+                flex-direction: column;
+            }
+
+            .footer-grid,
+            .values-grid,
+            .founders-grid,
+            .tech-list,
+            .header-actions {
+                grid-template-columns: 1fr;
+                flex-wrap: wrap;
+            }
+        }
+
+        .skip-link {
+            position: absolute;
+            left: 12px;
+            top: -48px;
+            z-index: 20;
+            padding: 8px 12px;
+            background: #263d66;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+
+        .skip-link:focus {
+            top: 12px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .theme-toggle {
+            border: 1px solid #555555;
+            border-radius: 4px;
+            padding: 8px 11px;
+            background: transparent;
+            color: #ffffff;
+            cursor: pointer;
+            font: .86rem Arial, sans-serif;
+        }
+
+        .hero-copy .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .ghost-button {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #263d66;
+            border-radius: 4px;
+            padding: 14px 24px;
+            color: #263d66;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-weight: 700;
+        }
+
+        .ghost-button:hover,
+        .ghost-button:focus-visible {
+            background: #f2f4f7;
+        }
+
+        .product-status {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 4px 10px;
+            border: 1px solid #c9c6bf;
+            border-radius: 999px;
+            background: #f2f4f7;
+            color: #263d66;
+            font: 700 .78rem Arial, sans-serif;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+
+        .product-kicker {
+            margin: 0 0 6px;
+            color: #687180;
+            font: 700 .75rem Arial, sans-serif;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .values,
+        .founders,
+        .principles,
+        .privacy {
+            width: min(90%, 1100px);
+            margin: 0 auto 72px;
+        }
+
+        .values-grid,
+        .founders-grid,
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .value-card,
+        .founder-card,
+        .principle-card,
+        .privacy {
+            padding: 24px;
+            background: #ffffff;
+            border: 1px solid #d8d5ce;
+            border-radius: 4px;
+        }
+
+        .value-card h3,
+        .founder-card h3,
+        .principle-card h3,
+        .privacy h2 {
+            margin-top: 0;
+            color: #202633;
+            font-weight: 500;
+        }
+
+        .value-card p,
+        .founder-card p,
+        .principle-card p,
+        .privacy p {
+            margin-bottom: 0;
+            color: #5c6470;
+        }
+
+        .nano-facts {
+            display: grid;
+            gap: 10px;
+            margin: 0;
+        }
+
+        .nano-facts div {
+            display: grid;
+            gap: 2px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ece9e2;
+        }
+
+        .nano-facts dt {
+            color: #687180;
+            font: 700 .75rem Arial, sans-serif;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        .nano-facts dd {
+            margin: 0;
+            color: #202633;
+        }
+
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 16px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .tech-list li {
+            padding: 6px 10px;
+            border: 1px solid #d8d5ce;
+            border-radius: 999px;
+            color: #263d66;
+            font: .82rem Arial, sans-serif;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 28px;
+            width: min(90%, 1100px);
+            margin: 0 auto 28px;
+            text-align: left;
+        }
+
+        .footer-grid h2 {
+            margin: 0 0 10px;
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .footer-grid a {
+            display: block;
+            color: #d8dce4;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-grid a:hover,
+        .footer-grid a:focus-visible {
+            color: #ffffff;
+        }
+
+        .footer-note {
+            margin: 0;
+        }
+
+        body.theme-dark {
+            color: #e8ecf4;
+            background: #070b14;
+        }
+
+        body.theme-dark .hero {
+            background: #121826;
+        }
+
+        body.theme-dark .hero-copy,
+        body.theme-dark .products-intro,
+        body.theme-dark .product-card,
+        body.theme-dark .ecosystem,
+        body.theme-dark .about,
+        body.theme-dark .support,
+        body.theme-dark .form-panel,
+        body.theme-dark .info-card,
+        body.theme-dark .roadmap-item,
+        body.theme-dark .faq details,
+        body.theme-dark .assistant-box,
+        body.theme-dark .nano-panel,
+        body.theme-dark .participation-item,
+        body.theme-dark .value-card,
+        body.theme-dark .founder-card,
+        body.theme-dark .principle-card,
+        body.theme-dark .privacy,
+        body.theme-dark .no-results,
+        body.theme-dark .modal-content {
+            background: #121826;
+            border-color: #2a3346;
+            color: #e8ecf4;
+        }
+
+        body.theme-dark .hero h2,
+        body.theme-dark .section-heading h2,
+        body.theme-dark .stat strong,
+        body.theme-dark .update-item h3,
+        body.theme-dark .nano-panel h2,
+        body.theme-dark .nano-facts dd {
+            color: #f4f7ff;
+        }
+
+        body.theme-dark .hero p,
+        body.theme-dark .section-heading p,
+        body.theme-dark .info-card p,
+        body.theme-dark .stat span,
+        body.theme-dark .update-item p {
+            color: #a8b0bf;
+        }
+
+        body.theme-dark .focus-notice,
+        body.theme-dark .assistant-message.bot {
+            background: #1b2333;
+            color: #d5dbe8;
+        }
+
+        body.theme-dark .product-toolbar input,
+        body.theme-dark .product-toolbar select,
+        body.theme-dark .support input,
+        body.theme-dark .support textarea,
+        body.theme-dark .form-panel input,
+        body.theme-dark .form-panel textarea,
+        body.theme-dark .form-panel select,
+        body.theme-dark .assistant-form input,
+        body.theme-dark .modal-content input,
+        body.theme-dark .modal-content textarea {
+            background: #0d1320;
+            border-color: #2a3346;
+            color: #e8ecf4;
+        }
+
+        body.theme-dark .stats-grid,
+        body.theme-dark .stat,
+        body.theme-dark .update-list,
+        body.theme-dark .update-item {
+            border-color: #2a3346;
+        }
+
+        body.theme-dark .ghost-button {
+            border-color: #8ea4d4;
+            color: #d5def2;
+        }
+
+        @media (max-width: 760px) {
+            .values-grid,
+            .founders-grid,
+            .principles-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#inicio">Pular para o conteúdo</a>
+    <header class="site-header">
+        <div class="brand">
+            <img src="AilaCompanySolutionsLOGO-removebg-preview.png" alt="Logo Aila Company Solutions">
+            <h1 class="brand-name">Aila<span class="company-part">Company Solutions</span></h1>
+        </div>
+        <div class="header-actions">
+            <button class="theme-toggle" type="button" id="theme-toggle" aria-pressed="false">Modo escuro</button>
+            <button class="text-size-toggle" type="button" id="text-size-toggle" aria-pressed="false">Texto maior</button>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+        </div>
+        <nav class="main-nav" id="main-nav" aria-label="Navegação principal">
+            <a href="#inicio">Início</a>
+            <a href="#assistente">Assistente</a>
+            <a href="#produtos">Produtos</a>
+            <a href="#aila-nano">Aila Nano</a>
+            <a href="#valores">Valores</a>
+            <a href="#quem-somos">Quem somos</a>
+            <a href="#roadmap">Roadmap</a>
+            <a href="#atualizacoes">Atualizações</a>
+            <a href="#suporte">Suporte</a>
+            <a href="#feedbacks">Feedbacks</a>
+        </nav>
+    </header>
+    <main>
+        <section class="hero" id="inicio" aria-label="Apresentação da Aila Company Solutions">
+            <img class="hero-image" src="aila-brand-visual.svg" alt="">
+            <div class="hero-brand">
+                <img src="AilaCompanySolutionsLOGO-removebg-preview.png" alt="Logo da Aila Company Solutions">
+                <h1>Aila<span class="company-part">Company Solutions</span></h1>
+            </div>
+        </section>
+        <section class="hero-copy" aria-labelledby="hero-title">
+            <p class="eyebrow brand-name">Aila<span class="company-part">Company Solutions</span></p>
+            <h2 id="hero-title">Tecnologia própria, pensada para crescer junto</h2>
+            <p>A Aila Company Solutions constrói um ecossistema de software, inteligência artificial, mapas, navegação e comunicação. O foco atual é o Aila Nano: um modelo de linguagem compacto, em pesquisa, com atenção especial ao português.</p>
+            <div class="hero-actions">
+                <button class="beta-button" type="button" id="open-beta-form">Seja um Beta Tester</button>
+                <a class="ghost-button" href="#produtos">Ver produtos</a>
+                <a class="ghost-button" href="#aila-nano">Conhecer o Aila Nano</a>
+            </div>
+        </section>
+
+        <section class="assistant-section" id="assistente" aria-labelledby="assistant-title">
+            <div class="section-heading">
+                <p class="eyebrow">Ajuda</p>
+                <h2 id="assistant-title">Assistente da Aila</h2>
+                <p>Faça uma pergunta sobre a Aila, os produtos ou o Aila Nano.</p>
+            </div>
+            <div class="assistant-box">
+                <div class="assistant-prompts" aria-label="Perguntas rápidas">
+                    <button class="assistant-prompt" type="button" data-question="O que é o Aila Nano?">O que é o Aila Nano?</button>
+                    <button class="assistant-prompt" type="button" data-question="Quais produtos fazem parte do ecossistema Aila?">Quais são os produtos?</button>
+                    <button class="assistant-prompt" type="button" data-question="Quem fundou a Aila Company Solutions?">Quem fundou a Aila?</button>
+                    <button class="assistant-prompt" type="button" data-question="Como posso participar dos testes beta?">Como participar dos testes?</button>
+                </div>
+                <div class="assistant-messages" id="assistant-messages" aria-live="polite">
+                    <div class="assistant-message bot">Olá. Posso explicar os projetos da Aila e o foco atual no Aila Nano.</div>
+                </div>
+                <form class="assistant-form" id="assistant-form">
+                    <label class="visually-hidden" for="assistant-input">Sua pergunta</label>
+                    <input id="assistant-input" type="text" maxlength="2000" placeholder="Digite sua pergunta" autocomplete="off" required>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+        </section>
+
+        <div class="modal" id="beta-modal" role="dialog" aria-modal="true" aria-labelledby="beta-title">
+            <div class="modal-content">
+                <button class="modal-close" type="button" id="close-beta-form" aria-label="Fechar formulário">&times;</button>
+                <h2 id="beta-title">Inscrição para Beta Testers</h2>
+                <p>Preencha o formulário para participar da seleção de Beta Testers.</p>
+                <form action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="64e38b45-a3bc-4aa6-9493-116bfbd66431">
+                    <label for="beta-name">Nome</label>
+                    <input id="beta-name" type="text" name="name" required>
+                    <label for="beta-email">E-mail</label>
+                    <input id="beta-email" type="email" name="email" required>
+                    <label for="beta-message">Por que você quer ser Beta Tester?</label>
+                    <textarea id="beta-message" name="message" required></textarea>
+                    <button type="submit">Enviar inscrição</button>
+                </form>
+            </div>
+        </div>
+
+        <section class="quick-links" aria-labelledby="quick-title">
+            <div class="section-heading">
+                <p class="eyebrow">Comece por aqui</p>
+                <h2 id="quick-title">Um lugar para cada próxima ideia</h2>
+                <p>Explore o ecossistema, acompanhe o que está sendo construído e ajude a definir os próximos passos.</p>
+            </div>
+            <div class="quick-grid">
+                <a class="info-card" href="#produtos">
+                    <h3>Conheça os produtos</h3>
+                    <p>Veja as soluções que estão dando forma ao ecossistema Aila.</p>
+                </a>
+                <a class="info-card" href="#roadmap">
+                    <h3>Acompanhe o roadmap</h3>
+                    <p>Descubra o que já está em construção e o que vem pela frente.</p>
+                </a>
+                <a class="info-card" href="#feedbacks">
+                    <h3>Faça parte</h3>
+                    <p>Envie uma ideia, reporte um bug ou participe dos testes.</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="platform" aria-labelledby="platform-title">
+            <div class="section-heading">
+                <p class="eyebrow">Nossa forma de construir</p>
+                <h2 id="platform-title">Pequenas ferramentas. Grandes conexões.</h2>
+            </div>
+            <div class="platform-grid">
+                <article class="info-card">
+                    <h3>Útil desde o primeiro dia</h3>
+                    <p>Cada projeto começa com um problema real e uma experiência simples de entender.</p>
+                </article>
+                <article class="info-card">
+                    <h3>Feito para trabalhar junto</h3>
+                    <p>Produtos independentes que podem compartilhar contexto, identidade e possibilidades.</p>
+                </article>
+                <article class="info-card">
+                    <h3>Melhorado com pessoas</h3>
+                    <p>Feedbacks e testes são parte do processo, não uma etapa depois do processo.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="site-stats" aria-labelledby="stats-title">
+            <div class="section-heading">
+                <p class="eyebrow">Onde estamos</p>
+                <h2 id="stats-title">Um projeto em construção</h2>
+                <p>O site acompanha uma empresa pequena, com ideias grandes e prioridades que podem mudar conforme o desenvolvimento avança.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat"><strong>1</strong><span>projeto principal neste momento</span></div>
+                <div class="stat"><strong>7</strong><span>projetos apresentados</span></div>
+                <div class="stat"><strong>100%</strong><span>foco atual no Aila Nano</span></div>
+                <div class="stat"><strong>aberto</strong><span>para testes e feedbacks</span></div>
+            </div>
+        </section>
+
+        <section class="nano-focus" id="aila-nano" aria-labelledby="nano-focus-title">
+            <div class="nano-panel">
+                <div>
+                    <p class="eyebrow">Projeto em foco</p>
+                    <h2 id="nano-focus-title">Aila Nano</h2>
+                    <p>O Aila Nano é a prioridade atual da Aila Company Solutions: um modelo de linguagem menor, eficiente e pensado para funcionar com menos recursos.</p>
+                    <p>O trabalho envolve pesquisa, treinamento, avaliação e ferramentas próprias. O objetivo é entender cada parte do processo e construir uma base sólida antes de prometer um produto pronto.</p>
+                </div>
+                <div>
+                    <h3>O que estamos estudando</h3>
+                    <dl class="nano-facts">
+                        <div>
+                            <dt>Tipo de projeto</dt>
+                            <dd>Small Language Model próprio, em pesquisa e desenvolvimento</dd>
+                        </div>
+                        <div>
+                            <dt>Direção técnica</dt>
+                            <dd>Arquitetura decoder-only, com experimentos em eficiência e português</dd>
+                        </div>
+                        <div>
+                            <dt>Prioridade</dt>
+                            <dd>Qualidade de dados, avaliação e treino antes de apenas aumentar o tamanho</dd>
+                        </div>
+                        <div>
+                            <dt>Status</dt>
+                            <dd>Experimental. Não há data oficial de lançamento</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <section class="values" id="valores" aria-labelledby="values-title">
+            <div class="section-heading">
+                <p class="eyebrow">Como decidimos</p>
+                <h2 id="values-title">Valores que guiam o trabalho</h2>
+                <p>A empresa é pequena. Por isso cada decisão precisa ser clara: o que construir agora, o que esperar e o que não prometer.</p>
+            </div>
+            <div class="values-grid">
+                <article class="value-card">
+                    <h3>Precisão antes de marketing</h3>
+                    <p>Projetos em pesquisa não são tratados como produtos lançados. Datas, preços e recursos só aparecem quando estiverem confirmados.</p>
+                </article>
+                <article class="value-card">
+                    <h3>Utilidade no dia a dia</h3>
+                    <p>Cada ideia começa com um problema real: explicar, localizar, comunicar, navegar ou organizar ferramentas do ecossistema.</p>
+                </article>
+                <article class="value-card">
+                    <h3>Tecnologia própria</h3>
+                    <p>A Aila estuda modelos, interfaces e integrações para entender o processo, não apenas encadear serviços de terceiros.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="principles" aria-labelledby="principles-title">
+            <div class="section-heading">
+                <p class="eyebrow">Como o ecossistema se conecta</p>
+                <h2 id="principles-title">Sete peças, uma direção</h2>
+            </div>
+            <div class="principles-grid">
+                <article class="principle-card">
+                    <h3>Aila AI</h3>
+                    <p>A área de inteligência artificial do ecossistema: conversas, explicações e apoio a tarefas.</p>
+                </article>
+                <article class="principle-card">
+                    <h3>Aila Nano</h3>
+                    <p>Pesquisa de um modelo compacto próprio, distinto do assistente deste site.</p>
+                </article>
+                <article class="principle-card">
+                    <h3>Aila Maps</h3>
+                    <p>Mapas, lugares e rotas como uma experiência própria de localização.</p>
+                </article>
+                <article class="principle-card">
+                    <h3>Aila Browser</h3>
+                    <p>Navegação na web como porta de entrada para os demais serviços.</p>
+                </article>
+                <article class="principle-card">
+                    <h3>Aila Messenger</h3>
+                    <p>Comunicação por mensagens, pensada para conviver com o restante da Aila.</p>
+                </article>
+                <article class="principle-card">
+                    <h3>Launcher e AilaVid</h3>
+                    <p>Organização de ferramentas do ecossistema e um projeto de conteúdo em vídeo, ambos em desenvolvimento.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="participation" id="participar" aria-labelledby="participation-title">
+            <div class="section-heading">
+                <p class="eyebrow">Participe do processo</p>
+                <h2 id="participation-title">Você pode ajudar de três formas</h2>
+            </div>
+            <div class="participation-grid">
+                <article class="participation-item">
+                    <h3>Testar</h3>
+                    <p>Candidate-se para experimentar versões iniciais e contar o que funcionou ou não.</p>
+                </article>
+                <article class="participation-item">
+                    <h3>Relatar</h3>
+                    <p>Envie bugs com detalhes do que aconteceu, em qual dispositivo e como reproduzir.</p>
+                </article>
+                <article class="participation-item">
+                    <h3>Sugerir</h3>
+                    <p>Compartilhe ideias práticas para tornar os produtos mais úteis e acessíveis.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="updates" id="atualizacoes" aria-labelledby="updates-title">
+            <div class="section-heading">
+                <p class="eyebrow">Registro público</p>
+                <h2 id="updates-title">Atualizações</h2>
+                <p>Um registro simples do que mudou e do que está sendo priorizado.</p>
+            </div>
+            <div class="update-list">
+                <article class="update-item">
+                    <time datetime="2026-09">Setembro de 2026</time>
+                    <div><h3>Catálogo ampliado no site</h3><p>O site passou a apresentar Aila Launcher e AilaVid, além de valores, fundadores e perguntas frequentes mais completas.</p></div>
+                </article>
+                <article class="update-item">
+                    <time datetime="2026-09">Setembro de 2026</time>
+                    <div><h3>Foco concentrado no Aila Nano</h3><p>Os estudos de modelos compactos passaram a ser a principal frente de desenvolvimento.</p></div>
+                </article>
+                <article class="update-item">
+                    <time datetime="2026-09">Setembro de 2026</time>
+                    <div><h3>Site aberto para feedbacks</h3><p>Foram adicionados canais para inscrição de Beta Testers, sugestões e relatos de bugs.</p></div>
+                </article>
+                <article class="update-item">
+                    <time datetime="2026-09">Próximos passos</time>
+                    <div><h3>Testes e documentação</h3><p>A próxima etapa depende dos resultados dos testes e da qualidade dos feedbacks recebidos.</p></div>
+                </article>
+            </div>
+        </section>
+
+        <section class="products" id="produtos" aria-labelledby="products-title">
+            <div class="products-intro">
+                <h2 id="products-title">Nossos produtos</h2>
+                <p>A <strong class="brand-name">Aila<span class="company-part">Company Solutions</span></strong> desenvolve um ecossistema de produtos e tecnologias próprias criado para conectar <strong>Inteligência Artificial, software, navegação, comunicação e experiências digitais</strong>.</p>
+                <p>Cada produto é desenvolvido com um objetivo: transformar ideias em ferramentas úteis, modernas e fáceis de utilizar.</p>
+                <p class="focus-notice"><strong>Nota sobre nossos projetos:</strong> neste momento, estamos totalmente focados no desenvolvimento do <strong>Aila Nano</strong>. Por isso, alguns dos outros projetos podem ser adiados, não chegar a ser lançados ou ser descontinuados.</p>
+            </div>
+            <div class="product-toolbar" aria-label="Filtrar produtos">
+                <input id="product-search" type="search" placeholder="Buscar produto ou tecnologia..." aria-label="Buscar produto">
+                <select id="product-filter" aria-label="Filtrar por área">
+                    <option value="all">Todas as áreas</option>
+                    <option value="ai">Inteligência Artificial</option>
+                    <option value="web">Web e navegação</option>
+                    <option value="social">Comunicação</option>
+                    <option value="maps">Mapas</option>
+                    <option value="tools">Ferramentas</option>
+                    <option value="media">Vídeo</option>
+                </select>
+            </div>
+            <p class="results-summary" id="results-summary" aria-live="polite">7 produtos exibidos</p>
+            <div class="products-grid">
+                <article class="product-card" data-category="ai" data-search="aila ai inteligencia artificial conversa textos programação pesquisa">
+                    <p class="product-kicker">Inteligência artificial</p>
+                    <h2>Aila AI</h2>
+                    <h3>Inteligência artificial para o dia a dia</h3>
+                    <p>O <strong>Aila AI</strong> é uma das principais soluções da <span class="brand-name">Aila<span class="company-part">Company Solutions</span></span> e representa nossa visão de uma Inteligência Artificial acessível, inteligente e integrada ao cotidiano.</p>
+                    <p>A plataforma foi pensada para ajudar usuários em diferentes tarefas, desde responder perguntas e explicar assuntos até auxiliar na criação de conteúdos, programação, pesquisa e resolução de problemas.</p>
+                    <p>O objetivo do Aila AI é tornar a Inteligência Artificial mais simples de usar, oferecendo uma experiência natural de conversa e interação.</p>
+                    <p><strong>Principais possibilidades:</strong></p>
+                    <ul>
+                        <li>Conversas com Inteligência Artificial</li>
+                        <li>Respostas e explicações inteligentes</li>
+                        <li>Auxílio na criação de textos</li>
+                        <li>Suporte para programação</li>
+                        <li>Pesquisa e organização de informações</li>
+                        <li>Auxílio em estudos e aprendizado</li>
+                        <li>Integração com outras tecnologias</li>
+                        <li>Suporte a diferentes idiomas</li>
+                    </ul>
+                    <p>O Aila AI está em constante evolução e faz parte da visão da Aila de criar tecnologias cada vez mais inteligentes e úteis.</p>
+                    <p class="product-status">Em desenvolvimento</p>
+                </article>
+
+                <article class="product-card" data-category="ai" data-search="aila nano inteligencia artificial slm machine learning modelo">
+                    <p class="product-kicker">Pesquisa em IA</p>
+                    <h2>Aila Nano</h2>
+                    <h3>Inteligência Artificial compacta e eficiente</h3>
+                    <p>O <strong>Aila Nano</strong> é um projeto de <strong>Small Language Model (SLM)</strong> desenvolvido pela <span class="brand-name">Aila<span class="company-part">Company Solutions</span></span>.</p>
+                    <p>Diferentemente de modelos gigantes que necessitam de enormes quantidades de recursos computacionais, o Aila Nano busca explorar modelos menores e eficientes, capazes de executar tarefas de linguagem utilizando uma quantidade mais reduzida de recursos.</p>
+                    <p>O projeto envolve pesquisa e desenvolvimento em áreas como <strong>Machine Learning, processamento de linguagem natural, treinamento de modelos e otimização de Inteligência Artificial</strong>.</p>
+                    <p>O Aila Nano representa nossa iniciativa de desenvolver tecnologia de IA própria, desde a arquitetura e treinamento até ferramentas de execução e utilização do modelo.</p>
+                    <p><strong>Principais objetivos:</strong></p>
+                    <ul>
+                        <li>Desenvolvimento de modelos de linguagem próprios</li>
+                        <li>Busca por maior eficiência computacional</li>
+                        <li>Treinamento com dados de qualidade</li>
+                        <li>Foco em suporte à língua portuguesa</li>
+                        <li>Pesquisa em Machine Learning</li>
+                        <li>Execução em diferentes tipos de hardware</li>
+                        <li>Desenvolvimento de ferramentas próprias para IA</li>
+                    </ul>
+                    <p>O Aila Nano é um dos projetos de pesquisa tecnológica da <span class="brand-name">Aila<span class="company-part">Company Solutions</span></span> e continua evoluindo junto com nossos estudos em Inteligência Artificial.</p>
+                    <p class="product-status">Em desenvolvimento</p>
+                </article>
+
+                <article class="product-card" data-category="maps" data-search="aila maps mapas localização rotas navegação lugares">
+                    <p class="product-kicker">Localização</p>
+                    <h2>Aila Maps</h2>
+                    <h3>Explore o mundo de uma maneira mais simples</h3>
+                    <p>O <strong>Aila Maps</strong> é uma plataforma de mapas e localização desenvolvida para oferecer ferramentas de navegação e exploração de lugares.</p>
+                    <p>A proposta é criar uma experiência moderna para visualizar mapas, pesquisar locais e encontrar caminhos, reunindo diferentes recursos de localização em uma única plataforma.</p>
+                    <p>O projeto utiliza tecnologias de mapas e serviços de localização para construir uma experiência própria dentro do ecossistema Aila.</p>
+                    <p><strong>Principais recursos:</strong></p>
+                    <ul>
+                        <li>Visualização de mapas</li>
+                        <li>Localização</li>
+                        <li>Pesquisa de lugares</li>
+                        <li>Rotas e navegação</li>
+                        <li>Planejamento de trajetos</li>
+                        <li>Exploração de diferentes regiões</li>
+                        <li>Informações sobre locais</li>
+                        <li>Experiência pensada para dispositivos modernos</li>
+                    </ul>
+                    <p>O Aila Maps tem como objetivo tornar a navegação digital mais simples, rápida e intuitiva.</p>
+                    <p class="product-status">Em desenvolvimento</p>
+                </article>
+
+                <article class="product-card" data-category="social" data-search="aila messenger comunicação mensagens grupos arquivos pessoas">
+                    <p class="product-kicker">Comunicação</p>
+                    <h2>Aila Messenger</h2>
+                    <h3>Comunicação simples, moderna e conectada</h3>
+                    <p>O <strong>Aila Messenger</strong> é uma plataforma de comunicação criada para conectar pessoas através de mensagens.</p>
+                    <p>A ideia do projeto é desenvolver uma experiência de comunicação moderna, com recursos que permitam conversar, compartilhar conteúdos e manter contato com outras pessoas dentro do ecossistema Aila.</p>
+                    <p>O Messenger também representa uma oportunidade de integrar comunicação com outros produtos da empresa, criando uma experiência mais conectada.</p>
+                    <p><strong>O que o projeto busca estudar:</strong></p>
+                    <ul>
+                        <li>Conversas por mensagens</li>
+                        <li>Possível comunicação em grupo, ainda sem confirmação de recursos da versão atual</li>
+                        <li>Compartilhamento de conteúdos, conforme a versão</li>
+                        <li>Integração futura com outros produtos da Aila</li>
+                    </ul>
+                    <p>O objetivo é criar uma plataforma de mensagens <strong>simples para começar, mas preparada para crescer junto com o ecossistema Aila</strong>.</p>
+                    <p class="product-status">Em desenvolvimento</p>
+                </article>
+
+                <article class="product-card" data-category="web" data-search="aila browser navegador internet abas privacidade inteligência artificial">
+                    <p class="product-kicker">Navegação</p>
+                    <h2>Aila Browser</h2>
+                    <h3>Uma nova maneira de navegar pela internet</h3>
+                    <p>O <strong>Aila Browser</strong> é o navegador desenvolvido pela <span class="brand-name">Aila<span class="company-part">Company Solutions</span></span>.</p>
+                    <p>O projeto busca oferecer uma experiência de navegação rápida, simples e integrada às tecnologias da Aila.</p>
+                    <p>Mais do que apenas acessar páginas da internet, o navegador foi pensado como uma porta de entrada para o ecossistema de produtos da empresa.</p>
+                    <p>A integração com serviços como <strong>Aila AI e Aila Maps</strong> pode permitir experiências mais inteligentes diretamente durante a navegação.</p>
+                    <p><strong>Principais objetivos:</strong></p>
+                    <ul>
+                        <li>Navegação na web</li>
+                        <li>Pesquisa na internet</li>
+                        <li>Favoritos e histórico</li>
+                        <li>Gerenciamento de abas</li>
+                        <li>Recursos de privacidade</li>
+                        <li>Experiência rápida e simples</li>
+                        <li>Integração com Inteligência Artificial</li>
+                        <li>Integração com serviços da Aila</li>
+                        <li>Experiência multiplataforma</li>
+                    </ul>
+                    <p>O Aila Browser representa nossa visão de um navegador moderno que combina <strong>internet, produtividade e Inteligência Artificial</strong> em uma única experiência.</p>
+                    <p class="product-status">Em desenvolvimento</p>
+                </article>
+
+                <article class="product-card" data-category="tools" data-search="aila launcher organizador aplicativos ferramentas atalhos ecossistema">
+                    <p class="product-kicker">Organização</p>
+                    <h2>Aila Launcher</h2>
+                    <h3>Um ponto de partida para o ecossistema</h3>
+                    <p>O <strong>Aila Launcher</strong> é um projeto para organizar e acessar aplicativos, ferramentas e serviços da Aila em um só lugar.</p>
+                    <p>A ideia é reduzir a fricção entre produtos: em vez de tratar cada ferramenta como um destino isolado, o launcher busca oferecer um caminho curto para o que a pessoa precisa naquele momento.</p>
+                    <p><strong>Direção do projeto:</strong></p>
+                    <ul>
+                        <li>Acesso rápido a produtos do ecossistema</li>
+                        <li>Organização de atalhos e ferramentas</li>
+                        <li>Ponto de entrada simples para quem está começando</li>
+                        <li>Espaço para crescer junto com novos serviços</li>
+                    </ul>
+                    <p>O launcher ainda está em desenvolvimento. Recursos específicos dependem da versão e não devem ser tratados como disponíveis hoje.</p>
+                    <p class="product-status">Em desenvolvimento</p>
+                </article>
+
+                <article class="product-card" data-category="media" data-search="ailavid aila vid vídeo audiovisual conteúdo">
+                    <p class="product-kicker">Vídeo</p>
+                    <h2>AilaVid</h2>
+                    <h3>Um projeto de conteúdo audiovisual</h3>
+                    <p>O <strong>AilaVid</strong> é um projeto relacionado a vídeo e conteúdo audiovisual dentro do ecossistema Aila.</p>
+                    <p>O trabalho ainda está em definição. Por isso, este site descreve a intenção do projeto — reunir experiência de vídeo à identidade da Aila — sem afirmar publicação, reprodução, recomendações ou outras funções como se já estivessem prontas.</p>
+                    <p><strong>O que está sendo estudado:</strong></p>
+                    <ul>
+                        <li>Conteúdo em vídeo associado à Aila</li>
+                        <li>Experiência audiovisual alinhada ao restante do ecossistema</li>
+                        <li>Possíveis conexões futuras com outros produtos</li>
+                    </ul>
+                    <p>Não há data oficial de lançamento nem lista confirmada de recursos públicos.</p>
+                    <p class="product-status">Em desenvolvimento</p>
+                </article>
+            </div>
+            <p class="no-results" id="no-results">Nenhum produto corresponde à sua busca. Tente outro termo ou selecione “Todas as áreas”.</p>
+            <section class="ecosystem" aria-labelledby="ecosystem-title">
+                <h2 id="ecosystem-title">Um ecossistema conectado</h2>
+                <p>Os produtos da <strong class="brand-name">Aila<span class="company-part">Company Solutions</span></strong> não são apenas projetos separados.</p>
+                <p>Nossa visão é construir um <strong>ecossistema tecnológico</strong>, no qual diferentes produtos possam trabalhar juntos.</p>
+                <p>Imagine utilizar o <strong>Aila AI</strong> para ajudar em uma pesquisa, encontrar um endereço através do <strong>Aila Maps</strong>, conversar pelo <strong>Aila Messenger</strong>, abrir tudo no <strong>Aila Browser</strong> e chegar aos serviços pelo <strong>Aila Launcher</strong>.</p>
+                <p>Essa integração é parte da visão. Hoje os projetos avançam em ritmos diferentes, com prioridade no Aila Nano.</p>
+                <h3>Tecnologias associadas a projetos</h3>
+                <p>Dependendo do projeto, a Aila já utilizou ou estuda ferramentas como as abaixo. Isso não significa que todos os produtos usam todas elas.</p>
+                <ul class="tech-list">
+                    <li>Python</li>
+                    <li>PyTorch</li>
+                    <li>JavaScript</li>
+                    <li>HTML e CSS</li>
+                    <li>React / Next.js</li>
+                    <li>Expo</li>
+                    <li>Firebase</li>
+                    <li>Supabase</li>
+                    <li>MapTiler</li>
+                    <li>OpenRouteService</li>
+                </ul>
+                <h3>Tecnologia. Inteligência. Conexão.</h3>
+                <p><strong class="brand-name">Aila<span class="company-part">Company Solutions</span> — criando tecnologia para o futuro.</strong></p>
+            </section>
+        </section>
+        <section class="about" id="quem-somos" aria-labelledby="about-title">
+            <h2 id="about-title">Quem Somos</h2>
+            <p>A <strong class="brand-name">Aila<span class="company-part">Company Solutions</span></strong> é uma empresa de tecnologia focada em criar soluções digitais modernas, inteligentes e acessíveis.</p>
+            <p>A empresa foi fundada por <strong>Theo Grunewald Hames</strong> e <strong>Guilherme Grunewald Bekendorf</strong>.</p>
+            <p>Desenvolvemos produtos e projetos próprios nas áreas de <strong>Inteligência Artificial, software, mapas, navegação, comunicação e pesquisa tecnológica</strong>, sempre buscando transformar ideias em experiências simples e úteis.</p>
+            <p>Os projetos apresentados hoje incluem <strong>Aila AI, Aila Nano, Aila Maps, Aila Messenger, Aila Browser, Aila Launcher e AilaVid</strong>. Outras ideias podem existir internamente sem ser tratadas como produtos atuais.</p>
+            <p>Nossa missão é <strong>criar tecnologia que facilite a vida das pessoas</strong>, combinando inovação, criatividade e desenvolvimento de software.</p>
+            <h3>Nossa visão</h3>
+            <p>Queremos construir um ecossistema de tecnologia cada vez maior, no qual diferentes produtos da Aila possam trabalhar juntos para oferecer uma experiência completa aos nossos usuários.</p>
+            <h3>Nosso objetivo</h3>
+            <p><strong>Inovar. Criar. Simplificar.</strong></p>
+            <p>Acreditamos que boas ideias podem começar pequenas e, com dedicação e tecnologia, se transformar em grandes soluções.</p>
+        </section>
+        <section class="founders" aria-labelledby="founders-title">
+            <div class="section-heading">
+                <p class="eyebrow">Quem constrói</p>
+                <h2 id="founders-title">Fundadores</h2>
+                <p>A Aila Company Solutions foi fundada por duas pessoas. Não há cargos oficiais publicados neste site.</p>
+            </div>
+            <div class="founders-grid">
+                <article class="founder-card">
+                    <h3>Theo Grunewald Hames</h3>
+                    <p>Cofundador da Aila Company Solutions. Participa da construção da empresa e dos produtos do ecossistema.</p>
+                </article>
+                <article class="founder-card">
+                    <h3>Guilherme Grunewald Bekendorf</h3>
+                    <p>Cofundador da Aila Company Solutions. Participa da construção da empresa e dos produtos do ecossistema.</p>
+                </article>
+                <article class="founder-card">
+                    <h3>Uma equipe em formação</h3>
+                    <p>O site não lista funcionários, investidores ou parceiros. Se isso mudar, a informação será publicada aqui de forma explícita.</p>
+                </article>
+            </div>
+        </section>
+        <section class="roadmap" id="roadmap" aria-labelledby="roadmap-title">
+            <div class="section-heading">
+                <p class="eyebrow">Em movimento</p>
+                <h2 id="roadmap-title">O que estamos construindo</h2>
+                <p>Um mapa aberto para acompanhar a evolução da Aila sem prometer atalhos.</p>
+            </div>
+            <div class="roadmap-grid">
+                <article class="roadmap-item">
+                    <h3>Agora</h3>
+                    <p>Pesquisa, protótipos e validação das primeiras experiências do ecossistema.</p>
+                </article>
+                <article class="roadmap-item">
+                    <h3>Próximo</h3>
+                    <p>Testes fechados com usuários, ajustes de usabilidade e primeiras integrações.</p>
+                </article>
+                <article class="roadmap-item">
+                    <h3>Depois</h3>
+                    <p>Experiências públicas mais estáveis, com acesso simples e melhorias contínuas.</p>
+                </article>
+                <article class="roadmap-item">
+                    <h3>Visão</h3>
+                    <p>Produtos conectados que tornam tecnologia avançada mais próxima das pessoas.</p>
+                </article>
+            </div>
+        </section>
+        <section class="faq" aria-labelledby="faq-title">
+            <div class="section-heading">
+                <p class="eyebrow">Dúvidas rápidas</p>
+                <h2 id="faq-title">Perguntas frequentes</h2>
+            </div>
+            <details>
+                <summary>Os produtos já estão disponíveis?</summary>
+                <p>A maior parte dos projetos está em desenvolvimento. Você pode acompanhar o roadmap e se candidatar aos testes.</p>
+            </details>
+            <details>
+                <summary>Como posso participar dos testes?</summary>
+                <p>Use o botão “Seja um Beta Tester” no topo e envie sua inscrição pelo formulário.</p>
+            </details>
+            <details>
+                <summary>Onde relato um bug?</summary>
+                <p>A seção “Feedbacks e bugs” aceita relatos, sugestões e informações de contexto para investigação.</p>
+            </details>
+            <details>
+                <summary>O Aila Nano já pode ser baixado?</summary>
+                <p>Não. O Aila Nano é um projeto de pesquisa. Não há confirmação de download, data de lançamento ou comparação oficial com outros modelos.</p>
+            </details>
+            <details>
+                <summary>O assistente deste site é o Aila Nano?</summary>
+                <p>Não. O assistente do site é uma experiência de atendimento sobre a Aila. O Aila Nano é um modelo próprio, em desenvolvimento, e as duas coisas não devem ser confundidas.</p>
+            </details>
+            <details>
+                <summary>Aila News, Aila Sounds e Aila Drive estão no catálogo?</summary>
+                <p>Não como produtos atuais principais. O catálogo público desta página concentra AI, Nano, Maps, Messenger, Browser, Launcher e AilaVid.</p>
+            </details>
+            <details>
+                <summary>Existe preço ou plano pago?</summary>
+                <p>Não há preço oficial confirmado. Qualquer cobrança futura só deve ser considerada quando estiver publicada de forma explícita.</p>
+            </details>
+        </section>
+        <section class="support" id="suporte" aria-labelledby="support-title">
+            <h2 id="support-title">Suporte</h2>
+            <form action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="30649e4b-6c7d-4870-875e-f251ebcf01c2">
+
+                <label for="name">Nome</label>
+                <input id="name" type="text" name="name" required>
+
+                <label for="email">E-mail</label>
+                <input id="email" type="email" name="email" required>
+
+                <label for="message">Mensagem</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <button type="submit">Enviar mensagem</button>
+            </form>
+        </section>
+        <section class="form-panel" id="feedbacks" aria-labelledby="feedbacks-title">
+            <h2 id="feedbacks-title">Feedbacks e bugs</h2>
+            <p>Conte sua experiência ou relate um problema para ajudar a melhorar os produtos da Aila.</p>
+            <form action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="64e38b45-a3bc-4aa6-9493-116bfbd66431">
+                <label for="feedback-name">Nome</label>
+                <input id="feedback-name" type="text" name="name" required>
+                <label for="feedback-email">E-mail</label>
+                <input id="feedback-email" type="email" name="email" required>
+                <label for="feedback-type">Tipo de mensagem</label>
+                <select id="feedback-type" name="type" required>
+                    <option value="">Selecione uma opção</option>
+                    <option value="feedback">Feedback</option>
+                    <option value="bug">Relatar bug</option>
+                </select>
+                <label for="feedback-message">Mensagem</label>
+                <textarea id="feedback-message" name="message" required></textarea>
+                <button type="submit">Enviar feedback</button>
+            </form>
+        </section>
+        <section class="privacy" id="privacidade" aria-labelledby="privacy-title">
+            <h2 id="privacy-title">Privacidade e contato</h2>
+            <p>Os formulários deste site enviam nome, e-mail e mensagem para que a Aila possa responder a inscrições, suporte e relatos. Não peça senhas, chaves de API ou dados bancários nestes campos. O assistente responde com base em informações públicas da empresa e não acessa contas internas.</p>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <h2 class="brand-name">Aila<span class="company-part">Company Solutions</span></h2>
+                <p>Inovar. Criar. Simplificar.</p>
+                <p class="footer-note">Empresa de tecnologia em construção, com foco atual no Aila Nano.</p>
+            </div>
+            <div>
+                <h2>Explorar</h2>
+                <a href="#produtos">Produtos</a>
+                <a href="#aila-nano">Aila Nano</a>
+                <a href="#roadmap">Roadmap</a>
+                <a href="#atualizacoes">Atualizações</a>
+                <a href="#quem-somos">Quem somos</a>
+            </div>
+            <div>
+                <h2>Participar</h2>
+                <a href="#assistente">Assistente</a>
+                <a href="#suporte">Suporte</a>
+                <a href="#feedbacks">Feedbacks e bugs</a>
+                <a href="#privacidade">Privacidade</a>
+                <button class="share-button" type="button" id="share-site">Copiar link do site</button>
+            </div>
+        </div>
+        <p>&copy; 2026 <span class="brand-name">Aila<span class="company-part">Company Solutions</span></span>. Todos os direitos reservados.</p>
+    </footer>
+    <button class="assistant-float" type="button" id="open-assistant" aria-label="Abrir Assistente">Assistente</button>
+    <button class="back-to-top" type="button" id="back-to-top" aria-label="Voltar ao topo">↑</button>
+    <script>
+        const betaModal = document.getElementById("beta-modal");
+        const openBetaForm = document.getElementById("open-beta-form");
+        const closeBetaForm = document.getElementById("close-beta-form");
+        const navToggle = document.querySelector(".nav-toggle");
+        const mainNav = document.getElementById("main-nav");
+        const productSearch = document.getElementById("product-search");
+        const productFilter = document.getElementById("product-filter");
+        const productCards = [...document.querySelectorAll(".product-card")];
+        const backToTop = document.getElementById("back-to-top");
+        const openAssistant = document.getElementById("open-assistant");
+        const assistantForm = document.getElementById("assistant-form");
+        const assistantInput = document.getElementById("assistant-input");
+        const assistantMessages = document.getElementById("assistant-messages");
+        const assistantPrompts = [...document.querySelectorAll(".assistant-prompt")];
+        const textSizeToggle = document.getElementById("text-size-toggle");
+        const themeToggle = document.getElementById("theme-toggle");
+        const resultsSummary = document.getElementById("results-summary");
+        const noResults = document.getElementById("no-results");
+        const shareSite = document.getElementById("share-site");
+
+        const addAssistantMessage = (message, sender) => {
+            const element = document.createElement("div");
+            element.className = `assistant-message ${sender}`;
+            element.textContent = message;
+            assistantMessages.appendChild(element);
+            assistantMessages.scrollTop = assistantMessages.scrollHeight;
+        };
+
+        assistantForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const message = assistantInput.value.trim();
+            if (!message) return;
+
+            const submitButton = assistantForm.querySelector("button");
+            addAssistantMessage(message, "user");
+            assistantInput.value = "";
+            submitButton.disabled = true;
+            submitButton.textContent = "Pensando...";
+
+            try {
+                const response = await fetch("/api/assistant", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message })
+                });
+
+                const responseText = await response.text();
+                let data = {};
+                if (responseText) {
+                    try {
+                        data = JSON.parse(responseText);
+                    } catch {
+                        throw new Error("Resposta inválida do assistente.");
+                    }
+                }
+
+                if (!response.ok) throw new Error(data.error || "Não foi possível responder agora.");
+                if (!data.answer) throw new Error("O assistente respondeu em branco. Tente novamente.");
+                addAssistantMessage(data.answer, "bot");
+            } catch (error) {
+                const message = error.message === "Failed to fetch"
+                    ? "Não foi possível acessar o assistente. Abra o site por http://localhost:3000 e confirme se o servidor está em execução."
+                    : error.message || "O assistente está temporariamente indisponível. Tente novamente em alguns instantes.";
+                addAssistantMessage(message, "bot");
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = "Enviar";
+                assistantInput.focus();
+            }
+        });
+
+        assistantPrompts.forEach((prompt) => {
+            prompt.addEventListener("click", () => {
+                assistantInput.value = prompt.dataset.question;
+                assistantForm.requestSubmit();
+            });
+        });
+
+        const savedTextSize = localStorage.getItem("aila-large-text") === "true";
+        document.body.classList.toggle("large-text", savedTextSize);
+        textSizeToggle.setAttribute("aria-pressed", String(savedTextSize));
+        textSizeToggle.textContent = savedTextSize ? "Texto normal" : "Texto maior";
+
+        textSizeToggle.addEventListener("click", () => {
+            const isLarge = document.body.classList.toggle("large-text");
+            localStorage.setItem("aila-large-text", String(isLarge));
+            textSizeToggle.setAttribute("aria-pressed", String(isLarge));
+            textSizeToggle.textContent = isLarge ? "Texto normal" : "Texto maior";
+        });
+
+        const savedTheme = localStorage.getItem("aila-theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const isDark = savedTheme ? savedTheme === "dark" : prefersDark;
+        document.body.classList.toggle("theme-dark", isDark);
+        themeToggle.setAttribute("aria-pressed", String(isDark));
+        themeToggle.textContent = isDark ? "Modo claro" : "Modo escuro";
+
+        themeToggle.addEventListener("click", () => {
+            const dark = document.body.classList.toggle("theme-dark");
+            localStorage.setItem("aila-theme", dark ? "dark" : "light");
+            themeToggle.setAttribute("aria-pressed", String(dark));
+            themeToggle.textContent = dark ? "Modo claro" : "Modo escuro";
+        });
+
+        const setModalState = (isOpen) => {
+            betaModal.classList.toggle("is-open", isOpen);
+            document.body.style.overflow = isOpen ? "hidden" : "";
+            if (isOpen) {
+                document.getElementById("beta-name").focus();
+            } else {
+                openBetaForm.focus();
+            }
+        };
+
+        openBetaForm.addEventListener("click", () => {
+            setModalState(true);
+        });
+
+        closeBetaForm.addEventListener("click", () => {
+            setModalState(false);
+        });
+
+        betaModal.addEventListener("click", (event) => {
+            if (event.target === betaModal) {
+                setModalState(false);
+            }
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && betaModal.classList.contains("is-open")) {
+                setModalState(false);
+            }
+        });
+
+        navToggle.addEventListener("click", () => {
+            const isOpen = mainNav.classList.toggle("is-open");
+            navToggle.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        mainNav.addEventListener("click", () => {
+            mainNav.classList.remove("is-open");
+            navToggle.setAttribute("aria-expanded", "false");
+        });
+
+        const filterProducts = () => {
+            const search = productSearch.value.trim().toLowerCase();
+            const category = productFilter.value;
+
+            productCards.forEach((card) => {
+                const matchesSearch = card.dataset.search.includes(search);
+                const matchesCategory = category === "all" || card.dataset.category === category;
+                card.classList.toggle("is-hidden", !(matchesSearch && matchesCategory));
+            });
+            const visibleCount = productCards.filter((card) => !card.classList.contains("is-hidden")).length;
+            resultsSummary.textContent = `${visibleCount} produto${visibleCount === 1 ? "" : "s"} exibido${visibleCount === 1 ? "" : "s"}`;
+            noResults.classList.toggle("is-visible", visibleCount === 0);
+        };
+
+        productSearch.addEventListener("input", filterProducts);
+        productFilter.addEventListener("change", filterProducts);
+
+        window.addEventListener("scroll", () => {
+            backToTop.classList.toggle("is-visible", window.scrollY > 600);
+        }, { passive: true });
+
+        backToTop.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        openAssistant.addEventListener("click", () => {
+            const assistantSection = document.getElementById("assistente");
+            assistantSection.scrollIntoView({ behavior: "smooth", block: "start" });
+            assistantInput.focus({ preventScroll: true });
+        });
+
+        shareSite.addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText(window.location.href);
+                shareSite.textContent = "Link copiado";
+            } catch {
+                shareSite.textContent = "Copie o link da barra do navegador";
+            }
+            window.setTimeout(() => {
+                shareSite.textContent = "Copiar link do site";
+            }, 2200);
+        });
+    </script>
+    <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
+    <script>
+        if (window.kofiWidgetOverlay) {
+            window.kofiWidgetOverlay.draw("ailacompanysolutions", {
+                "type": "floating-chat",
+                "floating-chat.donateButton.text": "Support Us",
+                "floating-chat.donateButton.background-color": "#00b9fe",
+                "floating-chat.donateButton.text-color": "#fff"
+            });
+        }
+    </script>
+</body>
+</html>

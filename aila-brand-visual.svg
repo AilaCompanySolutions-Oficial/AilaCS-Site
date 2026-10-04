@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Aila Company Solutions</title>
+  <desc id="desc">Composição institucional escura com a logo da Aila Company Solutions.</desc>
+  <rect width="1600" height="900" fill="#05070b"/>
+  <path d="M0 720H420" stroke="#1e6ee8" stroke-width="2" opacity=".9"/>
+  <path d="M1180 180h420" stroke="#1e6ee8" stroke-width="2" opacity=".9"/>
+  <path d="M160 120h240M1360 780h80" stroke="#7d8798" stroke-width="1" opacity=".55"/>
+  <circle cx="420" cy="720" r="4" fill="#1e6ee8"/>
+  <circle cx="1180" cy="180" r="4" fill="#1e6ee8"/>
+  <image href="AilaCompanySolutionsLOGO-removebg-preview.png" x="500" y="155" width="600" height="600" preserveAspectRatio="xMidYMid meet"/>
+</svg>
